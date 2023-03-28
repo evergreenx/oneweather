@@ -14,7 +14,7 @@ type SearchBoxProps = {
 export const SearchBox = ({ userInput, setUserInput }: SearchBoxProps) => {
   return (
     <form>
-      <div className="bg-white w-80 mx-auto shadow-2xl rounded-2xl p-2 flex items-center ">
+      <div className="bg-white w-80 mx-auto shadow-2xl my-5 rounded-2xl p-2 flex items-center ">
         <input
           type="text"
           value={userInput}

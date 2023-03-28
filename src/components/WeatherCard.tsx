@@ -4,6 +4,7 @@ import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { MdFavoriteBorder } from "react-icons/md";
 import { ForecastCard } from "./ForcastCard";
 import Link from "next/link";
+import Tooltip from "./Tooltip";
 
 type WeatherCardProps = {
   weatherData: any;
@@ -51,12 +52,16 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
       <div className="bg-white mt-9 rounded-3xl  w-96 mx-auto shadow-lg p-4 flex space-x-10 items-center ">
         <div className="weather__details">
           <div className="favourite__icon">
+
+            <Tooltip text="add location to favorite " >
             <MdFavoriteBorder
               className={`text-2xl cursor-pointer ${
                 isFavorited ? "text-red-600" : "hover:text-red-600"
               }`}
               onClick={handleFavorite}
             />
+            </Tooltip>
+            
           </div>
 
           <h1 className="font-bold text-[#000000] opacity-75 text-5xl">
@@ -81,6 +86,9 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
         </div>
 
         <div className="weather__image ">
+          <h2 className="text-sm text-gray-400 italic">
+            {weatherData?.weather[0]?.description}{" "}
+          </h2>
           {weatherData.weather && weatherData?.weather[0]?.icon && (
             // fetch the image from open weather api
             <Image

@@ -1,3 +1,4 @@
+import { FavoriteAccordion } from "@/components/";
 import React, { useState, useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
 
@@ -66,7 +67,7 @@ function FavLocatiion() {
               key={favorite.id}
               className="bg-white mt-9 rounded  w-96 mx-auto shadow-lg p-4 flex space-x-10 justify-between items-center "
             >
-              {favorite?.name} , {favorite?.sys?.country}
+              <FavoriteAccordion favorite={favorite} />
               <AiFillDelete
                 className="cursor-pointer text-2xl"
                 onClick={() => handleDeleteFavorite(favorite.id)}
