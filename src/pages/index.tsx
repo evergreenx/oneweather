@@ -23,55 +23,54 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-<div className=" bg-blue-50 ">
-      <div className="max-w-5xl w-screen h-screen p-5 mx-auto py-20 ">
-        <div className="search__container">
-          <SearchBox userInput={userInput} setUserInput={setUserInput} />
+      <div className=" bg-blue-50 ">
+        <div className="max-w-5xl w-screen h-screen p-5 mx-auto py-20 ">
+          <div className="search__container">
+            <SearchBox userInput={userInput} setUserInput={setUserInput} />
 
-          {
-            // show forecast option if user has searched for a city
-            userInput && (
-              <div className="flex items-center mb-4">
-                <input
-                  id="default-checkbox"
-                  type="checkbox"
-                  checked={showForecast}
-                  onChange={(e) => setShowForecast(e.target.checked)}
-                  value=""
-                  className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-400 dark:text-gray-300"
-                >
-                  Show Forecast for 5 days
-                </label>
-              </div>
-            )
-          }
+            {
+              // show forecast option if user has searched for a city
+              userInput && (
+                <div className="flex justify-center my-10 mb-4 mx-auto items-center">
+                  <input
+                    id="default-checkbox"
+                    type="checkbox"
+                    checked={showForecast}
+                    onChange={(e) => setShowForecast(e.target.checked)}
+                    value=""
+                    className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label
+                    htmlFor="default-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-400 dark:text-gray-300"
+                  >
+                    Show Forecast for 5 days
+                  </label>
+                </div>
+              )
+            }
 
-          {!isLoading && data && (
-            <WeatherCard showForecast={showForecast} weatherData={data} />
-          )}
-
-          <div className="error__container mx-auto flex ">
-            {isLoading && (
-              <p className="text-blue-300 font-extrabold text-2xl mx-auto my-10">
-                Loading...
-              </p>
+            {!isLoading && data && (
+              <WeatherCard showForecast={showForecast} weatherData={data} />
             )}
-          </div>
 
-          <div className="error__container mx-auto flex ">
-            {error && (
-              <p className="text-red-300 font-extrabold text-2xl mx-auto my-10">
-                {error.message}
-              </p>
-            )}
+            <div className="error__container mx-auto flex ">
+              {isLoading && (
+                <p className="text-blue-300 font-extrabold text-2xl mx-auto my-10">
+                  Loading...
+                </p>
+              )}
+            </div>
+
+            <div className="error__container mx-auto flex ">
+              {error && (
+                <p className="text-red-300 font-extrabold text-2xl mx-auto my-10">
+                  {error.message}
+                </p>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-
       </div>
     </div>
   );
