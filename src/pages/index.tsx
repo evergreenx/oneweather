@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [userInput, setUserInput] = useState("");
+  const [showForecast, setShowForecast] = useState(false);
 
   const { data, error, isLoading, mutate, isValidating } =
     useWeatherData(userInput);
@@ -27,7 +28,31 @@ export default function Home() {
         <div className="search__container">
           <SearchBox userInput={userInput} setUserInput={setUserInput} />
 
-          {!isLoading && data && <WeatherCard weatherData={data} />}
+          {
+            // show forecast option if user has searched for a city
+            userInput && (
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  checked={showForecast}
+                  onChange={(e) => setShowForecast(e.target.checked)}
+                  value=""
+                  className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-400 dark:text-gray-300"
+                >
+                  Show Forecast for 5 days
+                </label>
+              </div>
+            )
+          }
+
+          {!isLoading && data && (
+            <WeatherCard showForecast={showForecast} weatherData={data} />
+          )}
 
           <div className="error__container mx-auto flex ">
             {isLoading && (
