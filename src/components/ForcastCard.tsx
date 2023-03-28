@@ -5,6 +5,9 @@ interface Forecast {
   date: string;
   temperature: number;
   humidity: number;
+  main: {
+    temp: number;
+  }
 }
 
 interface ForecastCardProps {
