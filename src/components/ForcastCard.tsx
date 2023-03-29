@@ -11,6 +11,7 @@ interface Forecast {
   };
   weather: {
     icon: string;
+    main : string;
   }[];
 }
 
@@ -49,6 +50,12 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({
           <div key={index} className="forecast__card">
             <div className="forcast__results ">
               <div className="flex flex-col items-center">
+
+              <h1 className="text-sm font-medium italic text-gray-400">
+                 {
+                  forecast?.weather[0].main
+                 }
+                </h1>
                 <h1 className="text-sm font-semibold ">
                   {Math.round(forecast?.main?.temp)}
                   <sup>°</sup>
@@ -72,6 +79,8 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({
                 <h1 className="text-sm font-bold text-gray-500">
                   {forecastDays(index)[index]}
                 </h1>
+
+                
               </div>
             </div>
           </div>

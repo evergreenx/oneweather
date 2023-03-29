@@ -91,7 +91,7 @@ export default function Home() {
             )}
 
             <div className="error__container mx-auto flex ">
-              {isLoading && (
+              {isLoading && !error && (
                 <ContentLoader
                   speed={1}
                   width={490}
