@@ -15,9 +15,13 @@ interface Forecast {
 
 interface ForecastCardProps {
   forecasts: Forecast[];
+  temperatureUnit: string;
 }
 
-export const ForecastCard: React.FC<ForecastCardProps> = ({ forecasts }) => {
+export const ForecastCard: React.FC<ForecastCardProps> = ({
+  forecasts,
+  temperatureUnit,
+}) => {
   return (
     <div className="bg-white  lg:w-96 mx-auto my-10 rounded-2xl p-5 flex justify-around">
       {forecasts?.slice(0, 5).map((forecast, index) => (
@@ -25,7 +29,11 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({ forecasts }) => {
           <div className="forcast__results ">
             <div>
               <h1 className="text-sm font-semibold ">
-                {Math.round(forecast?.main?.temp)}°C
+                {Math.round(forecast?.main?.temp)}°
+                {
+                  // show the temperature unit
+                  temperatureUnit === "Metric" ? "C" : "F"
+                }
               </h1>
 
               <div className="weather__image ">

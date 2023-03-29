@@ -12,12 +12,15 @@ type WeatherCardProps = {
   temperatureUnit: string;
 };
 
-export function WeatherCard({ weatherData, showForecast , temperatureUnit }: WeatherCardProps) {
+export function WeatherCard({
+  weatherData,
+  showForecast,
+  temperatureUnit,
+}: WeatherCardProps) {
   const { forecasts, isError, isLoading } = useWeatherForecast(
     weatherData?.coord?.lon,
     weatherData?.coord?.lat,
-    temperatureUnit 
-   
+    temperatureUnit
   );
 
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
@@ -55,21 +58,24 @@ export function WeatherCard({ weatherData, showForecast , temperatureUnit }: Wea
       <div className="bg-white mt-9 rounded-3xl  lg:w-96 mx-auto shadow-lg p-4 flex space-x-10 items-center ">
         <div className="weather__details">
           <div className="favourite__icon">
-
-            <Tooltip text="add location to favorite " >
-            <MdFavoriteBorder
-              className={`text-2xl cursor-pointer ${
-                isFavorited ? "text-red-600" : "hover:text-red-600"
-              }`}
-              onClick={handleFavorite}
-            />
+            <Tooltip text="add location to favorite ">
+              <MdFavoriteBorder
+                className={`text-2xl cursor-pointer ${
+                  isFavorited ? "text-red-600" : "hover:text-red-600"
+                }`}
+                onClick={handleFavorite}
+              />
             </Tooltip>
-            
           </div>
 
           <h1 className="font-bold text-[#000000] opacity-75 lg:text-5xl text-2xl">
             {weatherData?.main?.temp}
             <sup>o</sup>
+
+            {
+              // show the temperature unit
+              temperatureUnit === "Metric" ? "C" : "F"
+            }
           </h1>
 
           {/* <h2>Cloudy</h2> */}
@@ -104,7 +110,7 @@ export function WeatherCard({ weatherData, showForecast , temperatureUnit }: Wea
         </div>
       </div>
 
-      {showForecast && <ForecastCard forecasts={forecasts?.list} />}
+      {showForecast && <ForecastCard forecasts={forecasts?.list} temperatureUnit = {temperatureUnit} />}
 
       {
         // see favlocation
