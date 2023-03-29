@@ -18,9 +18,8 @@ interface ForecastCardProps {
 }
 
 export const ForecastCard: React.FC<ForecastCardProps> = ({ forecasts }) => {
-  console.log(forecasts);
   return (
-    <div className="bg-white  w-96 mx-auto my-10 rounded-2xl p-5 flex justify-around">
+    <div className="bg-white  lg:w-96 mx-auto my-10 rounded-2xl p-5 flex justify-around">
       {forecasts?.slice(0, 5).map((forecast, index) => (
         <div key={index} className="forecast__card">
           <div className="forcast__results ">

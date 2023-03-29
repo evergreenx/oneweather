@@ -1,5 +1,5 @@
-import useSWR, { mutate, SWRResponse } from "swr";
-import { useEffect, useState } from "react";
+import useSWR, { SWRResponse } from "swr";
+import { useState, Dispatch, SetStateAction } from "react";
 
 interface WeatherData {
   main: {
@@ -27,38 +27,37 @@ const fetcher = async (url: string) => {
   }
   return res.json() as Promise<WeatherData>;
 };
-
-type UseWeatherDataResponse = SWRResponse<
+type WeatherDataResponse = SWRResponse<
   WeatherData,
   Error,
   () => Promise<WeatherData>
 >;
 
+type UseWeatherDataResponse = WeatherDataResponse & {
+  setIsMounted: Dispatch<SetStateAction<boolean>>;
+};
+
 export const useWeatherData = (city: string): UseWeatherDataResponse => {
-  const [debouncedTerm, setDebouncedTerm] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setDebouncedTerm(city);
-    }, 500);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [city]);
-  const { data, error, isValidating, isLoading } = useSWR(
-    debouncedTerm
+  const { data, error, isLoading, isValidating, mutate } = useSWR(
+    isMounted
       ? `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_URL}&units=metric`
       : null,
-    fetcher
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   return {
     data,
     error,
     isLoading,
-    mutate,
+    setIsMounted,
     isValidating,
+    mutate,
   };
 };
-

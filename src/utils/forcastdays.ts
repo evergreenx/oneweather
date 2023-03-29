@@ -1,5 +1,5 @@
 export const forecastDays = (index: number) => {
-  let WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat",];
 
   const date = new Date();
   const dayThisWeek = date.getDay();
@@ -7,5 +7,9 @@ export const forecastDays = (index: number) => {
     WEEK_DAYS.slice(dayThisWeek, dayThisWeek)
   );
 
+
+  console.log(forecastDays)
+
   return forecastDays;
+
 };

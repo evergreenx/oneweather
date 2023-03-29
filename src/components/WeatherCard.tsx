@@ -49,7 +49,7 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
   };
   return (
     <>
-      <div className="bg-white mt-9 rounded-3xl  w-96 mx-auto shadow-lg p-4 flex space-x-10 items-center ">
+      <div className="bg-white mt-9 rounded-3xl  lg:w-96 mx-auto shadow-lg p-4 flex space-x-10 items-center ">
         <div className="weather__details">
           <div className="favourite__icon">
 
@@ -64,7 +64,7 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
             
           </div>
 
-          <h1 className="font-bold text-[#000000] opacity-75 text-5xl">
+          <h1 className="font-bold text-[#000000] opacity-75 lg:text-5xl text-2xl">
             {weatherData?.main?.temp}
             <sup>o</sup>
           </h1>
@@ -75,7 +75,7 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
             {weatherData?.name} , {weatherData?.sys?.country}
           </h3>
 
-          <div className="flex space-x-3 mt-5 text-sm text-gray-600">
+          <div className="flex lg:space-x-3 space-x-2 mt-5 text-sm text-gray-600">
             <div className="flex">
               <h4>Wind {weatherData?.wind?.speed} km/h </h4>
             </div>
@@ -87,7 +87,7 @@ export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
 
         <div className="weather__image ">
           <h2 className="text-sm text-gray-400 italic">
-            {weatherData?.weather[0]?.description}{" "}
+            {weatherData.weather && weatherData?.weather[0]?.description}{" "}
           </h2>
           {weatherData.weather && weatherData?.weather[0]?.icon && (
             // fetch the image from open weather api

@@ -5,14 +5,65 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useWeatherData } from "@/hooks/useWeatherData ";
 import { SearchBox, WeatherCard } from "@/components";
+import useSWR, { mutate, SWRResponse } from "swr";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [userInput, setUserInput] = useState("");
   const [showForecast, setShowForecast] = useState(false);
 
-  const { data, error, isLoading, mutate, isValidating } =
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  // const { data, error, isLoading, mutate, isValidating } =
+  //   useWeatherData(userInput);
+
+  interface FetcherError extends Error {
+    info?: any;
+    status?: number;
+  }
+  interface WeatherData {
+    main: {
+      temp: number;
+      humidity: number;
+    };
+    weather: {
+      description: string;
+    }[];
+  }
+
+  const fetcher = async (url: string) => {
+    const res = await fetch(url);
+    if (res.status === 404) {
+      const error: FetcherError = new Error(
+        "The city you entered was not a real place"
+      );
+      error.info = await res.json();
+      error.status = res.status;
+      throw error;
+    }
+    return res.json() as Promise<WeatherData>;
+  };
+
+  const { data, error, isLoading, mutate, isValidating , setIsMounted } =
     useWeatherData(userInput);
+
+  const handleSubmit = (e: any) => {
+    if (userInput === "") {
+      alert("Please enter a city name");
+      return;
+    }
+
+    e.preventDefault();
+    alert(e.target.value);
+    // e.preventDefault();
+
+    // setUserInput(e.target.value);
+
+    setIsMounted(true);
+    // setShowForecast(false);
+    // mutate();
+  };
 
   return (
     <div>
@@ -26,7 +77,12 @@ export default function Home() {
       <div className=" bg-blue-50 ">
         <div className="max-w-5xl w-screen h-screen p-5 mx-auto py-20 ">
           <div className="search__container">
-            <SearchBox userInput={userInput} setUserInput={setUserInput} />
+            <SearchBox
+              userInput={userInput}
+              setUserInput={setUserInput}
+              handleSubmit={handleSubmit}
+              setIsMounted={setIsMounted}
+            />
 
             {
               // show forecast option if user has searched for a city
@@ -50,7 +106,7 @@ export default function Home() {
               )
             }
 
-            {!isLoading && data && (
+            {userInput && !isLoading && data && (
               <WeatherCard showForecast={showForecast} weatherData={data} />
             )}
 
