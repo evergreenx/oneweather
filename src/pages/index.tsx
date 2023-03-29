@@ -12,41 +12,10 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [userInput, setUserInput] = useState("");
   const [showForecast, setShowForecast] = useState(false);
+  const [tempUnit, setTempUnit] = useState("");
 
-  const [shouldFetch, setShouldFetch] = useState(false);
-
-  // const { data, error, isLoading, mutate, isValidating } =
-  //   useWeatherData(userInput);
-
-  interface FetcherError extends Error {
-    info?: any;
-    status?: number;
-  }
-  interface WeatherData {
-    main: {
-      temp: number;
-      humidity: number;
-    };
-    weather: {
-      description: string;
-    }[];
-  }
-
-  const fetcher = async (url: string) => {
-    const res = await fetch(url);
-    if (res.status === 404) {
-      const error: FetcherError = new Error(
-        "The city you entered was not a real place"
-      );
-      error.info = await res.json();
-      error.status = res.status;
-      throw error;
-    }
-    return res.json() as Promise<WeatherData>;
-  };
-
-  const { data, error, isLoading, mutate, isValidating , setIsMounted } =
-    useWeatherData(userInput);
+  const { data, error, isLoading, mutate, isValidating, setIsMounted } =
+    useWeatherData(userInput, tempUnit);
 
   const handleSubmit = (e: any) => {
     if (userInput === "") {
@@ -55,14 +24,8 @@ export default function Home() {
     }
 
     e.preventDefault();
-    alert(e.target.value);
-    // e.preventDefault();
-
-    // setUserInput(e.target.value);
 
     setIsMounted(true);
-    // setShowForecast(false);
-    // mutate();
   };
 
   return (
@@ -77,12 +40,26 @@ export default function Home() {
       <div className=" bg-blue-50 ">
         <div className="max-w-5xl w-screen h-screen p-5 mx-auto py-20 ">
           <div className="search__container">
-            <SearchBox
-              userInput={userInput}
-              setUserInput={setUserInput}
-              handleSubmit={handleSubmit}
-              setIsMounted={setIsMounted}
-            />
+            <div className="search__container__top lg:flex  mx-auto items-center justify-center lg:space-x-3">
+              <SearchBox
+                userInput={userInput}
+                setUserInput={setUserInput}
+                handleSubmit={handleSubmit}
+                setIsMounted={setIsMounted}
+              />
+
+              <select
+                className="w-20 h-10 rounded-lg border-2 mx-auto justify-center flex items-center border-gray-300 focus:outline-none outline-none focus:ring-2  focus:border-transparent"
+                defaultValue="metric"
+                onChange={(e) => {
+                  setIsMounted(false);
+                  setTempUnit(e.target.value);
+                }}
+              >
+                <option value="Metric">Celsius</option>
+                <option value="Imperial">Fahrenheit</option>
+              </select>
+            </div>
 
             {
               // show forecast option if user has searched for a city
@@ -107,7 +84,11 @@ export default function Home() {
             }
 
             {userInput && !isLoading && data && (
-              <WeatherCard showForecast={showForecast} weatherData={data} />
+              <WeatherCard
+                showForecast={showForecast}
+                weatherData={data}
+                temperatureUnit={tempUnit}
+              />
             )}
 
             <div className="error__container mx-auto flex ">

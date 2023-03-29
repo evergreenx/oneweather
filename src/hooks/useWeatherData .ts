@@ -37,12 +37,12 @@ type UseWeatherDataResponse = WeatherDataResponse & {
   setIsMounted: Dispatch<SetStateAction<boolean>>;
 };
 
-export const useWeatherData = (city: string): UseWeatherDataResponse => {
+export const useWeatherData = (city: string , temperatureUnit : string): UseWeatherDataResponse => {
   const [isMounted, setIsMounted] = useState(false);
 
   const { data, error, isLoading, isValidating, mutate } = useSWR(
     isMounted
-      ? `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_URL}&units=metric`
+      ? `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_URL}&units=${temperatureUnit}`
       : null,
     fetcher,
     {

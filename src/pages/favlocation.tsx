@@ -48,14 +48,14 @@ function FavLocatiion() {
     }
   };
   return (
-    <div className="bg-blue-50 h-screen">
-      <div className="max-w-5xl   p-5 mx-auto ">
+    <div className="bg-blue-50 h-screen w-full">
+      <div className="max-w-5xl py-5 px-8 mx-auto ">
         <h1 className="text-2xl font-bold text-gray-700">Favorite Locations</h1>
 
         {
           // show a message if there are no favorites
           favorites.length === 0 && (
-            <div className=" mt-9 rounded text-xl  w-96 mx-auto  p-4 flex space-x-10 items-center ">
+            <div className=" mt-9 rounded text-xl  lg:w-96 mx-auto flex space-x-10 items-center ">
               <h1 className="text-gray-500">No favorite locations yet !</h1>
             </div>
           )
@@ -65,7 +65,7 @@ function FavLocatiion() {
           favorites?.map((favorite: any) => (
             <div
               key={favorite.id}
-              className="bg-white mt-9 rounded  w-96 mx-auto shadow-lg p-4 flex space-x-10 justify-between items-center "
+              className="bg-white mt-9 rounded  lg:w-96 mx-auto shadow-lg p-4 flex space-x-10 justify-between items-center "
             >
               <FavoriteAccordion favorite={favorite} />
               <AiFillDelete

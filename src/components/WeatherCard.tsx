@@ -9,12 +9,15 @@ import Tooltip from "./Tooltip";
 type WeatherCardProps = {
   weatherData: any;
   showForecast: boolean;
+  temperatureUnit: string;
 };
 
-export function WeatherCard({ weatherData, showForecast }: WeatherCardProps) {
+export function WeatherCard({ weatherData, showForecast , temperatureUnit }: WeatherCardProps) {
   const { forecasts, isError, isLoading } = useWeatherForecast(
     weatherData?.coord?.lon,
-    weatherData?.coord?.lat
+    weatherData?.coord?.lat,
+    temperatureUnit 
+   
   );
 
   const [isFavorited, setIsFavorited] = useState<boolean>(false);

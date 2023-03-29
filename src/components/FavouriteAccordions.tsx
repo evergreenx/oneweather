@@ -26,7 +26,6 @@ type FavoriteAccordionProps = {
 export const FavoriteAccordion: React.FC<FavoriteAccordionProps> = ({
   favorite,
 }) => {
-  console.log(favorite);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
