@@ -31,3 +31,25 @@ The app displays a five-day forecast for each location, providing users with an 
 ## Tech Stack
 
 React, Typescript, tailwindcss for styling SWR for data fetching
+
+
+
+## Run locally 
+
+Get your API key from Open weather API [https://openweathermap.org/api](https://openweathermap.org/api)
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+
+
