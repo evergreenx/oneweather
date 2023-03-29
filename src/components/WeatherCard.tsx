@@ -55,7 +55,7 @@ export function WeatherCard({
   };
   return (
     <>
-      <div className="bg-white mt-9 rounded-3xl  lg:w-96 mx-auto shadow-lg p-4 flex space-x-10 items-center ">
+      <div className="bg-transparent mt-9 rounded-3xl  lg:w-96 mx-auto shadow-2xl p-4 flex space-x-10 items-center ">
         <div className="weather__details">
           <div className="favourite__icon">
             <Tooltip text="add location to favorite ">
@@ -111,7 +111,7 @@ export function WeatherCard({
         </div>
       </div>
 
-      {showForecast && <ForecastCard forecasts={forecasts?.list} temperatureUnit = {temperatureUnit} />}
+      {showForecast && <ForecastCard forecasts={forecasts?.list} temperatureUnit = {temperatureUnit} isLoading= {isLoading} />}
 
       {
         // see favlocation

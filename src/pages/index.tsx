@@ -1,18 +1,17 @@
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
+
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import { useWeatherData } from "@/hooks/useWeatherData ";
 import { SearchBox, WeatherCard } from "@/components";
-import useSWR, { mutate, SWRResponse } from "swr";
+import ContentLoader from "react-content-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [userInput, setUserInput] = useState("");
   const [showForecast, setShowForecast] = useState(false);
-  const [tempUnit, setTempUnit] = useState("");
+  const [tempUnit, setTempUnit] = useState("Metric");
 
   const { data, error, isLoading, mutate, isValidating, setIsMounted } =
     useWeatherData(userInput, tempUnit);
@@ -37,7 +36,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className=" bg-blue-50 ">
+      <div className=" ">
         <div className="max-w-5xl w-screen h-screen p-5 mx-auto py-20 ">
           <div className="search__container">
             <div className="search__container__top lg:flex  mx-auto items-center justify-center lg:space-x-3">
@@ -93,9 +92,18 @@ export default function Home() {
 
             <div className="error__container mx-auto flex ">
               {isLoading && (
-                <p className="text-blue-300 font-extrabold text-2xl mx-auto my-10">
-                  Loading...
-                </p>
+                <ContentLoader
+                  speed={1}
+                  width={490}
+                  height={378}
+                  viewBox="0 0 390 378"
+                  backgroundColor="#fff"
+                  foregroundColor="#ecebeb"
+                  className="mx-auto"
+                >
+                  <rect x="552" y="484" rx="0" ry="0" width="127" height="84" />
+                  <rect x="6" y="61" rx="23" ry="23" width="386" height="176" />
+                </ContentLoader>
               )}
             </div>
 

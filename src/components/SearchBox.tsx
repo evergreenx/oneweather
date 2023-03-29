@@ -1,5 +1,4 @@
 import { FiSearch } from "react-icons/fi";
-import { useRef } from "react";
 
 type SearchBoxProps = {
   userInput: string;
@@ -14,7 +13,6 @@ export const SearchBox = ({
   handleSubmit,
   setIsMounted,
 }: SearchBoxProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <form onSubmit={handleSubmit}>

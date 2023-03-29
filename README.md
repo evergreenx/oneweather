@@ -1,38 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# One Weather
 
-## Getting Started
+One Weather is a weather app that allows users to check the current weather and five-day forecast for any location. With its user-friendly interface, users can quickly and easily view the temperature in Celsius and save their favorite locations for future reference. The app is designed to handle invalid input to ensure a smooth user experience.
 
-First, run the development server:
+## Screenshots
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+![Screenshot](https://res.cloudinary.com/evergreenx/image/upload/v1680104597/save_rnet5j.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Celsius Option
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Users can choose to view the temperature in Celsius by selecting the Celsius option in the settings.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Current Weather Display
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+One Weather displays the current weather for a given location, allowing users to quickly check the temperature and weather conditions.
 
-## Learn More
+### Error Handling
 
-To learn more about Next.js, take a look at the following resources:
+The app is designed to handle invalid input, ensuring that users are provided with accurate weather information.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Favorite Locations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+One Weather allows users to save their favorite locations for easy access in the future. Users can view their favorite locations and quickly check the weather for each one.
 
-## Deploy on Vercel
+### Five-Day Forecast
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app displays a five-day forecast for each location, providing users with an extended outlook on the weather conditions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tech Stack
+
+React, Typescript, tailwindcss for styling SWR for data fetching
