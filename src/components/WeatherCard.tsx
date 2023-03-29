@@ -70,7 +70,8 @@ export function WeatherCard({
 
           <h1 className="font-bold text-[#000000] opacity-75 lg:text-5xl text-2xl">
             {weatherData?.main?.temp}
-            <sup>o</sup>
+            <sup>°</sup>
+
 
             {
               // show the temperature unit

@@ -29,7 +29,8 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({
           <div className="forcast__results ">
             <div>
               <h1 className="text-sm font-semibold ">
-                {Math.round(forecast?.main?.temp)}°
+                {Math.round(forecast?.main?.temp)}
+                <sup>°</sup>
                 {
                   // show the temperature unit
                   temperatureUnit === "Metric" ? "C" : "F"
